@@ -9,6 +9,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Where am I?';
 
+  public formOpen = false;
 
+  openForm() {
+    this.formOpen = true;
+    console.log("opening Form")
+    
+  }
+
+  closeForm() {
+    console.log("closing Form")
+    this.formOpen = false;
+  }
 
 }

@@ -1,0 +1,9 @@
+{
+    "hidden-object": [
+      { "id": 1, "latitude": "55.612868", "longitude": "12.989645", "found": false, "nameOfFinder": null },
+      { "id": 2, "latitude": "55.621391756660934", "longitude": "12.999068144253712", "found": true, "nameOfFinder": "Janni" },
+      { "id": 3, "latitude": "55.58465674296695", "longitude": "13.039163724711877", "found": false, "nameOfFinder": null },
+      { "id": 4, "latitude": "55.63381372353037", "longitude": "13.031090017744837", "found": true, "nameOfFinder": "Axel" },
+      { "id": 5, "latitude": "55.60727158457947", "longitude": "13.020619128262316", "found": false, "nameOfFinder": null }
+    ]
+  }

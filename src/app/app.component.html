@@ -1,2 +1,6 @@
 Här är en julig header kanske?
-<app-map />
+<app-map (openForm)="openForm()"/>
+<app-form *ngIf="formOpen"/>
+<button (click)="closeForm()" *ngIf="formOpen">Close form</button>
+
+{{formOpen}}
