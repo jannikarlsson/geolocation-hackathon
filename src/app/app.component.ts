@@ -11,6 +11,8 @@ export class AppComponent {
 
   public formOpen = false;
 
+  isDialogOpen = false;
+
   openForm() {
     this.formOpen = true;
     console.log("opening Form")
@@ -21,5 +23,10 @@ export class AppComponent {
     console.log("closing Form")
     this.formOpen = false;
   }
+
+  toggleModal() {
+    this.isDialogOpen = !this.isDialogOpen
+  }
+
 
 }

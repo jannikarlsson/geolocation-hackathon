@@ -6,17 +6,19 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormComponent } from './form/form.component'
+import { DialogComponent } from './dialog/dialog.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    FormComponent
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: !isDevMode(),
     //   // Register the ServiceWorker as soon as the application is stable

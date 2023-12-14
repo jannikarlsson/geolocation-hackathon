@@ -1,9 +1,174 @@
 {
     "hidden-object": [
-      { "id": 1, "latitude": "55.612868", "longitude": "12.989645", "found": false, "nameOfFinder": null },
-      { "id": 2, "latitude": "55.621391756660934", "longitude": "12.999068144253712", "found": true, "nameOfFinder": "Janni" },
-      { "id": 3, "latitude": "55.58465674296695", "longitude": "13.039163724711877", "found": false, "nameOfFinder": null },
-      { "id": 4, "latitude": "55.63381372353037", "longitude": "13.031090017744837", "found": true, "nameOfFinder": "Axel" },
-      { "id": 5, "latitude": "55.60727158457947", "longitude": "13.020619128262316", "found": false, "nameOfFinder": null }
+      
+        {
+          "id": 1,
+          "latitude": "55.604981",
+          "longitude": "13.003822",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 2,
+          "latitude": "55.591133",
+          "longitude": "13.017634",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 3,
+          "latitude": "55.594389",
+          "longitude": "13.021675",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 4,
+          "latitude": "55.602722",
+          "longitude": "13.018195",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 5,
+          "latitude": "55.608440",
+          "longitude": "13.000453",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 6,
+          "latitude": "55.605022",
+          "longitude": "12.995775",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 7,
+          "latitude": "55.593160",
+          "longitude": "13.010678",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 8,
+          "latitude": "55.591780",
+          "longitude": "13.005166",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 9,
+          "latitude": "55.590724",
+          "longitude": "13.013335",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 10,
+          "latitude": "55.589022",
+          "longitude": "13.023944",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 11,
+          "latitude": "55.592549",
+          "longitude": "13.016695",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 12,
+          "latitude": "55.603657",
+          "longitude": "13.016280",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 13,
+          "latitude": "55.607953",
+          "longitude": "12.990465",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 14,
+          "latitude": "55.599538",
+          "longitude": "13.022451",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 15,
+          "latitude": "55.598928",
+          "longitude": "13.001556",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 16,
+          "latitude": "55.590961",
+          "longitude": "13.019794",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 17,
+          "latitude": "55.607310",
+          "longitude": "12.993822",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 18,
+          "latitude": "55.594837",
+          "longitude": "12.998365",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 19,
+          "latitude": "55.591891",
+          "longitude": "13.008764",
+          "found": false,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 20,
+          "latitude": "55.599289",
+          "longitude": "12.994070",
+          "found": false,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 21,
+          "latitude": "55.605692",
+          "longitude": "13.012643",
+          "found": false,
+          "nameOfFinder": "Vilhelm"
+        },
+        {
+          "id": 22,
+          "latitude": "55.593528",
+          "longitude": "12.997418",
+          "found": true,
+          "nameOfFinder": "Agge"
+        },
+        {
+          "id": 23,
+          "latitude": "55.594978",
+          "longitude": "12.994134",
+          "found": true,
+          "nameOfFinder": "Janni"
+        },
+        {
+          "id": 24,
+          "latitude": "55.601784",
+          "longitude": "13.011049",
+          "found": true,
+          "nameOfFinder": "Vilhelm"
+        }
+            
     ]
   }

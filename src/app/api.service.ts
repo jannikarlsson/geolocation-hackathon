@@ -7,6 +7,7 @@ export interface HiddenObject {
   latitude: number;
   longitude: number;
   found: boolean;
+  nameOfFinder: string | null;
 }
 
 @Injectable({
@@ -22,4 +23,7 @@ export class ApiService {
     return this.http.get<HiddenObject[]>(`${this.baseUrl}hidden-object`)
   }
 
+  claimHiddenObject(object: HiddenObject) {
+    return this.http.patch(`${this.baseUrl}hidden-object/${object.id}`, object)
+  }
 }

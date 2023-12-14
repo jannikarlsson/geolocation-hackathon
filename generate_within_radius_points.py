@@ -27,7 +27,6 @@ import pandas as pd
 # -- CONSTANTS --
 # https://en.wikipedia.org/wiki/Earth_radius
 EARTH_RADIUS_KM = 6371
-# Skövde center according to Google Maps
 CENTER_P = {"lat": 55.6127391, "lon": 12.9899597}
 MAX_DISTANCE_KM = 0.1
 OUTPUT_FILE_NAME = 'latlon.csv'

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, NgZone, OnInit, Output, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, NgZone, OnInit, Output, inject } from '@angular/core';
 import * as L from 'leaflet';
 import { Icon, LatLng, icon, latLng, marker, tileLayer } from 'leaflet';
 import { ApiService, HiddenObject } from '../api.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -11,6 +12,10 @@ import { ApiService, HiddenObject } from '../api.service';
 export class MapComponent implements OnInit {
   @Output() openForm = new EventEmitter();
 
+  finderForm = new FormControl('', Validators.required);
+
+  isDialogOpen = false;
+
   public userLocation: LatLng = latLng(0, 0);
 
   public mapOptions = {
@@ -18,6 +23,8 @@ export class MapComponent implements OnInit {
   };
 
   private apiService = inject(ApiService);
+
+  public currentLoc: HiddenObject = {} as HiddenObject;
 
   mapLayer = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
   userMarker = marker(this.userLocation, {
@@ -29,7 +36,7 @@ export class MapComponent implements OnInit {
     })
   })
 
-  locMarkers: {id: number, marker: L.Marker, found: boolean }[] = []
+  locMarkers: {id: number, marker: L.Marker, found: boolean, nameOfFinder: string | null; }[] = []
 
   layers: (L.TileLayer | L.Marker)[] = [
       this.mapLayer,
@@ -50,6 +57,9 @@ export class MapComponent implements OnInit {
     iconUrl: 'assets/gray-gift.png',
   })
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
+
   ngOnInit() {
     // setInterval(() => {
     //   this.getUserLocation();
@@ -57,7 +67,7 @@ export class MapComponent implements OnInit {
     this.getUserLocation();
     this.apiService.getHiddenObject().subscribe((data) => {
       console.log(data)
-      this.makeMarkers(data.map((loc) => ({id: loc.id, loc: latLng(loc.latitude, loc.longitude), found: loc.found})))
+      this.makeMarkers(data.map((loc) => ({id: loc.id, loc: latLng(loc.latitude, loc.longitude), found: loc.found, nameOfFinder: loc.nameOfFinder})))
     })
   }
 
@@ -92,7 +102,7 @@ export class MapComponent implements OnInit {
       this.mapLayer,
       this.userMarker,
     ]
-    this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found})))
+    this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found, nameOfFinder: marker.nameOfFinder})))
     this.layers = this.layers.concat(this.locMarkers.map((marker) => marker.marker))
     console.log(this.layers)
   }
@@ -101,7 +111,7 @@ export class MapComponent implements OnInit {
     this.map = event;
   }
 
-  makeMarkers(locs: {id: number, loc: LatLng, found: boolean}[]) {
+  makeMarkers(locs: {id: number, loc: LatLng, found: boolean, nameOfFinder: string | null}[]) {
     if (locs) {
       this.locMarkers = locs.map((loc) => {
         return {
@@ -112,13 +122,46 @@ export class MapComponent implements OnInit {
               iconAnchor: [ 13, 41 ],
               iconUrl: loc.found ? 'assets/gift-gray.png' : 'assets/gift.png',
             })
+            
           }).on('click', event => {
-            this.openForm.emit();
-            console.log('Yay, my marker was clicked' + loc.id, event) 
+            this.handleMarkerClick(loc)
         }),
-        found: loc.found
+        found: loc.found,
+        nameOfFinder: loc.nameOfFinder
         }
       })
     }
+  }
+  
+  handleMarkerClick(loc: {id: number, loc: LatLng, found: boolean, nameOfFinder: string | null}) {
+    this.isDialogOpen = true;
+    const latitude = loc.loc.lat;
+    const longitude = loc.loc.lng;
+    this.currentLoc = {
+      id: loc.id,
+      latitude: latitude,
+      longitude: longitude,
+      found: loc.found,
+      nameOfFinder: loc.nameOfFinder
+    };
+    this.cdr.detectChanges();
+    console.log('Yay, my marker was clicked' + loc.id, event) 
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    this.cdr.detectChanges();
+  }
+
+  saveAndCloseDialog() {
+    console.log(this.finderForm.value)
+    this.apiService.claimHiddenObject({
+      ...this.currentLoc,
+      found: true,
+      nameOfFinder: this.finderForm.value
+    })
+    this.isDialogOpen = false;
+    this.cdr.detectChanges();
+    this.finderForm.setValue('');
   }
 }

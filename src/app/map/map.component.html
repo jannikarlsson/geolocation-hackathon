@@ -7,3 +7,36 @@
      [leafletCenter]="userLocation"
      (leafletMapReady)="onMapReady($event)">
 </div>
+
+<!-- <app-dialog [isDialogOpen]="isDialogOpen" (closeModal)="closeModal()" (saveName)= saveName() [isFound]="currentLoc?.found ?? false">
+     {{currentLoc | json}}
+     <div *ngIf="currentLoc?.found">
+          Hittades av {{currentLoc?.nameOfFinder}}
+     </div>
+     <div *ngIf="!currentLoc?.found">
+          Skriv ditt namn här för att claima julklappen!
+          <input [formControl]="finderForm" />
+     </div>
+</app-dialog> -->
+
+<div class="modal" [ngClass]="isDialogOpen ? 'is-active' : null" [ngStyle]="{'z-index': 99999}">
+     <div class="modal-background"></div>
+     <div class="modal-card">
+       <header class="modal-card-head">
+         <p class="modal-card-title">{{ currentLoc?.found ? 'Julklappen är redan hittad' : 'Du hittade en julklapp!'}}</p>
+         <button class="delete" aria-label="close" (click)="closeDialog()"></button>
+       </header>
+       <section class="modal-card-body">
+          <div *ngIf="currentLoc?.found">
+               Hittades av {{currentLoc?.nameOfFinder}}
+          </div>
+          <div *ngIf="!currentLoc?.found">
+               Skriv ditt namn här för att claima julklappen!
+               <input [formControl]="finderForm" />
+          </div>
+       </section>
+       <footer class="modal-card-foot" *ngIf="!currentLoc?.found">
+         <button class="button is-success"  (click)="saveAndCloseDialog()" [disabled]="!finderForm.valid">Claima julklappen!</button>
+       </footer>
+     </div>
+   </div>
