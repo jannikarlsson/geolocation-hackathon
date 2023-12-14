@@ -61,10 +61,10 @@ export class MapComponent implements OnInit {
 
 
   ngOnInit() {
-    // setInterval(() => {
-    //   this.getUserLocation();
-    // }, 3000);
-    this.getUserLocation();
+    setInterval(() => {
+      this.getUserLocation();
+    }, 5000);
+    // this.getUserLocation();
     this.apiService.getHiddenObject().subscribe((data) => {
       console.log(data)
       this.makeMarkers(data.map((loc) => ({id: loc.id, loc: latLng(loc.latitude, loc.longitude), found: loc.found, nameOfFinder: loc.nameOfFinder})))
