@@ -102,12 +102,13 @@ export class MapComponent implements OnInit {
   }
 
   updateLayers() {
+    this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found, nameOfFinder: marker.nameOfFinder})))
     this.layers = [
       this.mapLayer,
       this.userMarker,
+      ...this.locMarkers.map((marker) => marker.marker)
     ]
-    this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found, nameOfFinder: marker.nameOfFinder})))
-    this.layers = this.layers.concat(this.locMarkers.map((marker) => marker.marker))
+    // this.layers = this.layers.concat(this.locMarkers.map((marker) => marker.marker))
     console.log(this.layers)
     this.cdr.detectChanges();
   }
