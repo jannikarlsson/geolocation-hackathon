@@ -71,6 +71,10 @@ export class MapComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
   getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -105,6 +109,7 @@ export class MapComponent implements OnInit {
     this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found, nameOfFinder: marker.nameOfFinder})))
     this.layers = this.layers.concat(this.locMarkers.map((marker) => marker.marker))
     console.log(this.layers)
+    this.cdr.detectChanges();
   }
 
   onMapReady(event: L.Map) {
@@ -161,7 +166,8 @@ export class MapComponent implements OnInit {
       nameOfFinder: this.finderForm.value
     })
     this.isDialogOpen = false;
-    this.cdr.detectChanges();
     this.finderForm.setValue('');
+    this.cdr.detectChanges();
+    
   }
 }
