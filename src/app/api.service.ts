@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface HiddenObject {
-  id: number;
+  id: string;
   latitude: number;
   longitude: number;
   found: boolean;
@@ -16,7 +16,7 @@ export interface HiddenObject {
 export class ApiService {
 
   private http = inject(HttpClient)
-  private baseUrl = 'http://localhost:3000/'
+  private baseUrl = 'http://localhost:8199/api/'
   // private baseUrl = 'http://localhost:5000/'
 
   getHiddenObject(): Observable<HiddenObject[]> {
@@ -24,6 +24,11 @@ export class ApiService {
   }
 
   claimHiddenObject(object: HiddenObject) {
-    return this.http.patch(`${this.baseUrl}hidden-object/${object.id}`, object)
+    const body = {
+      ...object,
+      latitude: object.latitude.toString(),
+      longitude: object.longitude.toString(),
+    }
+    return this.http.patch(`${this.baseUrl}hidden-object/${object.id}`, body).subscribe();
   }
 }

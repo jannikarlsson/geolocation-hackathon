@@ -36,7 +36,7 @@ export class MapComponent implements OnInit {
     })
   })
 
-  locMarkers: {id: number, marker: L.Marker, found: boolean, nameOfFinder: string | null; }[] = []
+  locMarkers: {id: string, marker: L.Marker, found: boolean, nameOfFinder: string | null; }[] = []
 
   layers: (L.TileLayer | L.Marker)[] = [
       this.mapLayer,
@@ -61,10 +61,10 @@ export class MapComponent implements OnInit {
 
 
   ngOnInit() {
-    setInterval(() => {
-      this.getUserLocation();
-    }, 5000);
-    // this.getUserLocation();
+    // setInterval(() => {
+    //   this.getUserLocation();
+    // }, 5000);
+    this.getUserLocation();
     this.apiService.getHiddenObject().subscribe((data) => {
       console.log(data)
       this.makeMarkers(data.map((loc) => ({id: loc.id, loc: latLng(loc.latitude, loc.longitude), found: loc.found, nameOfFinder: loc.nameOfFinder})))
@@ -117,7 +117,7 @@ export class MapComponent implements OnInit {
     this.map = event;
   }
 
-  makeMarkers(locs: {id: number, loc: LatLng, found: boolean, nameOfFinder: string | null}[]) {
+  makeMarkers(locs: {id: string, loc: LatLng, found: boolean, nameOfFinder: string | null}[]) {
     if (locs) {
       this.locMarkers = locs.map((loc) => {
         return {
@@ -139,7 +139,7 @@ export class MapComponent implements OnInit {
     }
   }
   
-  handleMarkerClick(loc: {id: number, loc: LatLng, found: boolean, nameOfFinder: string | null}) {
+  handleMarkerClick(loc: {id: string, loc: LatLng, found: boolean, nameOfFinder: string | null}) {
     this.isDialogOpen = true;
     const latitude = loc.loc.lat;
     const longitude = loc.loc.lng;
