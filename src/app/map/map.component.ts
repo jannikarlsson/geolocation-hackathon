@@ -65,9 +65,11 @@ export class MapComponent implements OnInit {
     //   this.getUserLocation();
     // }, 5000);
     this.getUserLocation();
-    this.apiService.getHiddenObject().subscribe((data) => {
-      console.log(data)
+    this.apiService.loadHiddenObjects();
+    this.apiService.hiddenObjects$.subscribe((data) => {
       this.makeMarkers(data.map((loc) => ({id: loc.id, loc: latLng(loc.latitude, loc.longitude), found: loc.found, nameOfFinder: loc.nameOfFinder})))
+      this.updateLayers();
+      this.cdr.detectChanges();
     })
   }
 
@@ -102,13 +104,11 @@ export class MapComponent implements OnInit {
   }
 
   updateLayers() {
-    this.makeMarkers(this.locMarkers.map((marker) => ({id: marker.id, loc: marker.marker.getLatLng(), found: marker.found, nameOfFinder: marker.nameOfFinder})))
     this.layers = [
       this.mapLayer,
       this.userMarker,
       ...this.locMarkers.map((marker) => marker.marker)
     ]
-    // this.layers = this.layers.concat(this.locMarkers.map((marker) => marker.marker))
     console.log(this.layers)
     this.cdr.detectChanges();
   }
@@ -129,7 +129,7 @@ export class MapComponent implements OnInit {
               iconUrl: loc.found ? 'assets/gift-gray.png' : 'assets/gift.png',
             })
             
-          }).on('click', event => {
+          }).on('click', () => {
             this.handleMarkerClick(loc)
         }),
         found: loc.found,
@@ -151,7 +151,6 @@ export class MapComponent implements OnInit {
       nameOfFinder: loc.nameOfFinder
     };
     this.cdr.detectChanges();
-    console.log('Yay, my marker was clicked' + loc.id, event) 
   }
 
   closeDialog() {
@@ -160,7 +159,6 @@ export class MapComponent implements OnInit {
   }
 
   saveAndCloseDialog() {
-    console.log(this.finderForm.value)
     this.apiService.claimHiddenObject({
       ...this.currentLoc,
       found: true,
@@ -169,6 +167,5 @@ export class MapComponent implements OnInit {
     this.isDialogOpen = false;
     this.finderForm.setValue('');
     this.cdr.detectChanges();
-    
   }
 }
